@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gelila Solomon — Data & BI Analyst</title>
+<meta name="description" content="Portfolio of Gelila Solomon, Data & BI Analyst — dashboards, analysis, and data-driven storytelling.">
+<meta property="og:title" content="Gelila Solomon — Data & BI Analyst">
+<meta property="og:description" content="Dashboards, analysis, and data-driven storytelling — from civic tech to Formula 1 telemetry.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12181C;
+    --panel:#1A2126;
+    --paper:#F1F2ED;
+    --paper-dim:#E4E6DD;
+    --line-dark: rgba(241,242,237,0.12);
+    --line-light: rgba(18,24,28,0.12);
+    --text-soft:#A9B2AE;
+    --amber:#E2A63B;
+    --cyan:#46AFC5;
+    --crimson:#C1443C;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'IBM Plex Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+    --rail-w: 220px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  ::selection{background:var(--amber); color:var(--ink);}
+  :focus-visible{outline:2px solid var(--cyan); outline-offset:3px;}
+
+  /* ---------- Telemetry line signature ---------- */
+  .telemetry{
+    width:100%; height:34px; display:block; overflow:visible;
+  }
+  .telemetry path{
+    fill:none; stroke:var(--cyan); stroke-width:1.5;
+    stroke-dasharray:6 5;
+    animation:flow 3.2s linear infinite;
+    opacity:0.85;
+  }
+  @keyframes flow{ to{ stroke-dashoffset:-110; } }
+  @media (prefers-reduced-motion: reduce){
+    .telemetry path{ animation:none; }
+  }
+
+  .divider{
+    width:100%; height:22px; margin:0 0 2.4rem 0;
+  }
+  .divider path{ fill:none; stroke:var(--line-dark); stroke-width:1.2; }
+  .divider.on-light path{ stroke:var(--line-light); }
+
+  /* ---------- Layout: sidebar rail + main ---------- */
+  .layout{ display:flex; min-height:100vh; }
+
+  .rail{
+    width:var(--rail-w); flex-shrink:0;
+    position:sticky; top:0; height:100vh;
+    padding:2.2rem 1.6rem;
+    border-right:1px solid var(--line-dark);
+    display:flex; flex-direction:column; justify-content:space-between;
+  }
+  .rail-top .id{
+    font-family:var(--display); font-weight:700; font-size:1.15rem; letter-spacing:-0.01em;
+  }
+  .rail-top .role{
+    font-family:var(--mono); font-size:0.72rem; color:var(--amber); margin-top:0.35rem;
+    text-transform:uppercase; letter-spacing:0.08em;
+  }
+  nav.rail-nav{ margin-top:2.6rem; display:flex; flex-direction:column; gap:0.9rem; }
+  nav.rail-nav a{
+    font-family:var(--mono); font-size:0.82rem; color:var(--text-soft);
+    display:flex; align-items:center; gap:0.6rem; padding:0.25rem 0;
+    transition:color 0.2s ease;
+  }
+  nav.rail-nav a .idx{ color:var(--cyan); opacity:0.6; font-size:0.75rem; }
+  nav.rail-nav a:hover, nav.rail-nav a.active{ color:var(--paper); }
+  nav.rail-nav a.active .idx{ opacity:1; }
+
+  .rail-bottom{ display:flex; flex-direction:column; gap:0.5rem; }
+  .rail-bottom a{
+    font-family:var(--mono); font-size:0.72rem; color:var(--text-soft);
+  }
+  .rail-bottom a:hover{ color:var(--cyan); }
+  .status{
+    display:flex; align-items:center; gap:0.5rem; margin-top:1rem;
+    font-family:var(--mono); font-size:0.68rem; color:var(--text-soft);
+  }
+  .status .dot{
+    width:7px; height:7px; border-radius:50%; background:var(--cyan);
+    box-shadow:0 0 0 0 rgba(70,175,197,0.6);
+    animation:pulse 2s infinite;
+  }
+  @keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(70,175,197,0.5); }
+    70%{ box-shadow:0 0 0 6px rgba(70,175,197,0); }
+    100%{ box-shadow:0 0 0 0 rgba(70,175,197,0); }
+  }
+
+  main{ flex:1; min-width:0; }
+
+  /* Mobile top nav */
+  .topnav{ display:none; }
+
+  section{ padding:5.5rem 4vw 1rem; max-width:1040px; }
+  section.tight{ padding-top:0; }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding-top:4.2rem; }
+  .eyebrow{
+    font-family:var(--mono); font-size:0.78rem; color:var(--amber);
+    text-transform:uppercase; letter-spacing:0.1em; margin-bottom:1.1rem;
+  }
+  h1{
+    font-family:var(--display); font-weight:700; font-size:clamp(2.2rem, 4.6vw, 3.6rem);
+    line-height:1.08; letter-spacing:-0.015em; max-width:16ch;
+  }
+  h1 .accent{ color:var(--cyan); }
+  .lede{
+    font-size:1.08rem; color:var(--text-soft); max-width:56ch; margin-top:1.5rem;
+  }
+  .cta-row{ display:flex; gap:1rem; margin-top:2.2rem; flex-wrap:wrap; }
+  .btn{
+    font-family:var(--mono); font-size:0.82rem; padding:0.75rem 1.3rem;
+    border-radius:3px; border:1px solid var(--line-dark);
+    transition:all 0.2s ease; display:inline-flex; align-items:center; gap:0.5rem;
+  }
+  .btn.primary{ background:var(--cyan); color:var(--ink); border-color:var(--cyan); }
+  .btn.primary:hover{ background:var(--amber); border-color:var(--amber); }
+  .btn.ghost:hover{ border-color:var(--paper); }
+
+  .readout-row{
+    display:flex; gap:2.4rem; margin-top:3rem; flex-wrap:wrap;
+  }
+  .readout .val{ font-family:var(--mono); font-size:1.5rem; color:var(--paper); }
+  .readout .lab{ font-family:var(--mono); font-size:0.68rem; color:var(--text-soft); text-transform:uppercase; letter-spacing:0.06em; margin-top:0.2rem;}
+
+  /* ---------- Section headers ---------- */
+  .sec-head{ display:flex; align-items:baseline; gap:0.8rem; margin-bottom:2.2rem; }
+  .sec-num{ font-family:var(--mono); color:var(--cyan); font-size:0.85rem; }
+  h2{ font-family:var(--display); font-weight:600; font-size:1.7rem; letter-spacing:-0.01em; }
+  .sec-sub{ color:var(--text-soft); max-width:60ch; margin-bottom:2.4rem; margin-top:-1.2rem; font-size:0.96rem; }
+
+  /* ---------- About ---------- */
+  .about-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:3rem; }
+  .about-grid p{ color:var(--text-soft); margin-bottom:1rem; }
+  .about-grid strong{ color:var(--paper); font-weight:600; }
+  .fact-list{ font-family:var(--mono); font-size:0.82rem; display:flex; flex-direction:column; gap:0.9rem; }
+  .fact-list .k{ color:var(--text-soft); display:block; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; }
+  .fact-list .v{ color:var(--paper); margin-top:0.15rem; display:block; }
+
+  /* ---------- Skills ---------- */
+  .skill-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:1.6rem; }
+  .skill-card{ border:1px solid var(--line-dark); border-radius:4px; padding:1.3rem 1.4rem; }
+  .skill-card h3{
+    font-family:var(--mono); font-size:0.74rem; color:var(--amber);
+    text-transform:uppercase; letter-spacing:0.07em; margin-bottom:0.8rem;
+  }
+  .skill-card .tags{ display:flex; flex-wrap:wrap; gap:0.4rem 0.5rem; }
+  .skill-card .tags span{
+    font-family:var(--mono); font-size:0.78rem; color:var(--text-soft);
+  }
+  .skill-card .tags span:not(:last-child)::after{ content:'·'; margin-left:0.5rem; color:var(--line-dark); }
+
+  /* ---------- Projects ---------- */
+  .proj-filter{ display:flex; gap:0.6rem; margin-bottom:2rem; font-family:var(--mono); font-size:0.76rem; flex-wrap:wrap; }
+  .proj-filter span{
+    padding:0.35rem 0.75rem; border:1px solid var(--line-dark); border-radius:20px; color:var(--text-soft);
+  }
+  .proj-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:1.3rem; }
+  .card{
+    background:var(--panel); border:1px solid var(--line-dark); border-radius:6px;
+    padding:1.5rem; display:flex; flex-direction:column; gap:0.9rem;
+    transition:border-color 0.2s ease, transform 0.2s ease;
+  }
+  .card:hover{ border-color:var(--cyan); transform:translateY(-2px); }
+  .card-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:0.6rem; }
+  .card h3{ font-family:var(--display); font-size:1.08rem; font-weight:600; line-height:1.3; }
+  .badge{
+    font-family:var(--mono); font-size:0.63rem; padding:0.25rem 0.55rem; border-radius:20px;
+    white-space:nowrap; text-transform:uppercase; letter-spacing:0.04em;
+  }
+  .badge.build{ background:rgba(226,166,59,0.14); color:var(--amber); border:1px solid rgba(226,166,59,0.35); }
+  .badge.case{ background:rgba(70,175,197,0.14); color:var(--cyan); border:1px solid rgba(70,175,197,0.35); }
+  .card p{ color:var(--text-soft); font-size:0.9rem; flex:1; }
+  .card .stack{ display:flex; flex-wrap:wrap; gap:0.4rem; font-family:var(--mono); font-size:0.68rem; color:var(--text-soft); }
+  .card .stack span{ border:1px solid var(--line-dark); padding:0.15rem 0.5rem; border-radius:3px; }
+  .card .links{ display:flex; gap:1rem; margin-top:0.3rem; font-family:var(--mono); font-size:0.78rem; }
+  .card .links a{ color:var(--cyan); }
+  .card .links a:hover{ color:var(--amber); }
+  .card .note{ font-size:0.74rem; color:var(--text-soft); font-style:italic; }
+
+  /* ---------- Experience ---------- */
+  .timeline{ display:flex; flex-direction:column; }
+  .tl-item{
+    display:grid; grid-template-columns:150px 1fr; gap:2rem;
+    padding:1.6rem 0; border-top:1px solid var(--line-dark);
+  }
+  .tl-item:last-child{ border-bottom:1px solid var(--line-dark); }
+  .tl-date{ font-family:var(--mono); font-size:0.76rem; color:var(--amber); }
+  .tl-role{ font-family:var(--display); font-weight:600; font-size:1.05rem; }
+  .tl-org{ color:var(--text-soft); font-size:0.88rem; margin-top:0.15rem; margin-bottom:0.7rem; }
+  .tl-item ul{ padding-left:1.1rem; display:flex; flex-direction:column; gap:0.4rem; }
+  .tl-item li{ color:var(--text-soft); font-size:0.88rem; }
+  .tl-item li::marker{ color:var(--cyan); }
+
+  /* ---------- Resume ---------- */
+  .resume-panel{
+    background:var(--panel); border:1px solid var(--line-dark); border-radius:6px;
+    padding:2rem; display:flex; flex-direction:column; gap:1.4rem;
+  }
+  .resume-embed{
+    width:100%; height:560px; border:1px solid var(--line-dark); border-radius:4px; background:var(--paper);
+  }
+  .resume-actions{ display:flex; gap:1rem; flex-wrap:wrap; }
+
+  /* ---------- Footer / contact ---------- */
+  footer{ padding:5rem 4vw 3.5rem; max-width:1040px; }
+  footer h2{ margin-bottom:1rem; }
+  .contact-row{ display:flex; gap:2rem; flex-wrap:wrap; margin-top:1.6rem; }
+  .contact-row a{ font-family:var(--mono); font-size:0.88rem; color:var(--cyan); border-bottom:1px solid transparent; }
+  .contact-row a:hover{ border-color:var(--cyan); }
+  .foot-note{ margin-top:3rem; color:var(--text-soft); font-size:0.75rem; font-family:var(--mono); }
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal{ opacity:0; transform:translateY(14px); transition:opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:900px){
+    .rail{ display:none; }
+    .topnav{
+      display:flex; position:sticky; top:0; z-index:20; background:var(--ink);
+      border-bottom:1px solid var(--line-dark); padding:1rem 5vw; align-items:center; justify-content:space-between;
+    }
+    .topnav .id{ font-family:var(--display); font-weight:700; }
+    .topnav nav{ display:flex; gap:1rem; font-family:var(--mono); font-size:0.72rem; color:var(--text-soft); }
+    .about-grid{ grid-template-columns:1fr; }
+    .tl-item{ grid-template-columns:1fr; gap:0.4rem; }
+    section{ padding:3.5rem 6vw 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <span class="id">GS</span>
+  <nav>
+    <a href="#work">Work</a>
+    <a href="#experience">Exp</a>
+    <a href="#resume">Resume</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</div>
+
+<div class="layout">
+  <aside class="rail">
+    <div class="rail-top">
+      <div class="id">Gelila Solomon</div>
+      <div class="role">Data &amp; BI Analyst</div>
+      <nav class="rail-nav" id="railNav">
+        <a href="#top"><span class="idx">◆</span> Home</a>
+        <a href="#about"><span class="idx">◆</span> About</a>
+        <a href="#skills"><span class="idx">◆</span> Skills</a>
+        <a href="#work"><span class="idx">◆</span> Projects</a>
+        <a href="#experience"><span class="idx">◆</span> Experience</a>
+        <a href="#resume"><span class="idx">◆</span> Resume</a>
+        <a href="#contact"><span class="idx">◆</span> Contact</a>
+      </nav>
+    </div>
+    <div class="rail-bottom">
+      <div class="status"><span class="dot"></span> Available for opportunities</div>
+      <a href="https://www.linkedin.com/in/gelilaksolomon" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="#" target="_blank" rel="noopener" id="githubLink">GitHub ↗</a>
+      <a href="mailto:gksolomon11@gmail.com">Email</a>
+    </div>
+  </aside>
+
+  <main>
+    <section class="hero" id="top">
+      <svg class="telemetry" viewBox="0 0 600 34" preserveAspectRatio="none">
+        <path d="M0,20 L40,20 L55,6 L70,28 L85,20 L120,20 L135,14 L150,26 L165,20 L600,20"/>
+      </svg>
+      <div class="eyebrow">Inglewood, CA · Open to Data &amp; BI Analyst roles</div>
+      <h1>Turning raw data into <span class="accent">decisions people act on.</span></h1>
+      <p class="lede">I'm Gelila — a data &amp; BI analyst who builds the pipeline from messy raw signal to a dashboard someone actually trusts. Background in civic tech, freelance consulting, and product analytics, with a healthy side obsession with Formula 1 telemetry.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="#work">View projects</a>
+        <a class="btn ghost" href="#resume">Resume</a>
+        <a class="btn ghost" href="mailto:gksolomon11@gmail.com">Get in touch</a>
+      </div>
+      <div class="readout-row">
+        <div class="readout"><div class="val">3+ yrs</div><div class="lab">Applied analytics</div></div>
+        <div class="readout"><div class="val">7</div><div class="lab">BI &amp; data tools</div></div>
+        <div class="readout"><div class="val">4</div><div class="lab">Live case studies</div></div>
+      </div>
+    </section>
+
+    <section id="about">
+      <svg class="divider" viewBox="0 0 1000 22" preserveAspectRatio="none"><path d="M0,11 L1000,11"/></svg>
+      <div class="sec-head"><span class="sec-num">01</span><h2>About</h2></div>
+      <div class="about-grid">
+        <div>
+          <p><strong>I like data that has to earn its conclusions.</strong> My background spans civic tech — analyzing 311 complaints and housing court records to surface patterns of discriminatory code enforcement — freelance consulting on database migrations and reporting infrastructure for small businesses, and product analytics for a footwear recommendation engine used across two continents.</p>
+          <p>What ties it together: I care less about the tool and more about whether the output changes what someone does next. That's the standard every project on this site is built to.</p>
+          <p>Outside of work, I follow Formula 1 closely enough that I eventually turned race telemetry into a portfolio project — proof that if data exists, I probably want to poke at it.</p>
+        </div>
+        <div class="fact-list">
+          <div><span class="k">Education</span><span class="v">B.A. Computer Science, Boston University — 2024</span></div>
+          <div><span class="k">Certifications</span><span class="v">IBM Data Analyst · CompTIA A+ (in progress)</span></div>
+          <div><span class="k">Based in</span><span class="v">Inglewood, CA</span></div>
+          <div><span class="k">Currently</span><span class="v">Freelance Technical Consultant</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <svg class="divider" viewBox="0 0 1000 22" preserveAspectRatio="none"><path d="M0,11 L1000,11"/></svg>
+      <div class="sec-head"><span class="sec-num">02</span><h2>Skills &amp; Tools</h2></div>
+      <div class="skill-grid">
+        <div class="skill-card">
+          <h3>Languages</h3>
+          <div class="tags"><span>Python</span><span>SQL (MySQL)</span><span>R</span><span>JavaScript</span><span>TypeScript</span><span>HTML/CSS</span></div>
+        </div>
+        <div class="skill-card">
+          <h3>BI &amp; Visualization</h3>
+          <div class="tags"><span>Tableau</span><span>Power BI</span><span>Looker</span><span>IBM Cognos</span></div>
+        </div>
+        <div class="skill-card">
+          <h3>Data &amp; Cloud</h3>
+          <div class="tags"><span>AWS</span><span>Database Design</span><span>Data Engineering</span><span>Machine Learning</span></div>
+        </div>
+        <div class="skill-card">
+          <h3>Practice</h3>
+          <div class="tags"><span>Git / GitLab</span><span>Agile · Scrum</span><span>Waterfall</span><span>Technical Writing</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work">
+      <svg class="divider" viewBox="0 0 1000 22" preserveAspectRatio="none"><path d="M0,11 L1000,11"/></svg>
+      <div class="sec-head"><span class="sec-num">03</span><h2>Projects</h2></div>
+      <p class="sec-sub">Four new projects built to demonstrate the full analytics loop end-to-end, alongside case studies from civic tech and industry work where the underlying code is proprietary.</p>
+
+      <div class="proj-grid">
+        <div class="card">
+          <div class="card-top"><h3>F1 Performance Dashboard</h3><span class="badge build">In build</span></div>
+          <p>An interactive dashboard comparing driver pace, tire strategy, and sector deltas across a season, built on real telemetry.</p>
+          <div class="stack"><span>Python</span><span>FastF1</span><span>Tableau / Power BI</span></div>
+          <p class="note">Repo + live dashboard link coming soon.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-top"><h3>End-to-End Insight Story</h3><span class="badge build">In build</span></div>
+          <p>Raw dataset to written narrative — cleaning, exploration, and a clear takeaway a non-technical reader can act on.</p>
+          <div class="stack"><span>Python</span><span>Pandas</span><span>Seaborn</span></div>
+          <p class="note">Repo + writeup link coming soon.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-top"><h3>SMB Analytics Case Study</h3><span class="badge build">In build</span></div>
+          <p>A mock small-business engagement modeled on real freelance work: SQL-backed dashboard ending in a concrete recommendation.</p>
+          <div class="stack"><span>SQL</span><span>Power BI / Looker</span></div>
+          <p class="note">Repo + case study link coming soon.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-top"><h3>Pipeline → BI Dashboard</h3><span class="badge build">In build</span></div>
+          <p>A small SQL + Python ETL pipeline feeding a live dashboard — the plumbing behind the visuals, not just the visuals.</p>
+          <div class="stack"><span>SQL</span><span>Python</span><span>AWS</span></div>
+          <p class="note">Repo + live dashboard link coming soon.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-top"><h3>Bad Landlords Data Transparency</h3><span class="badge case">Case study</span></div>
+          <p>Scraped and processed Boston housing court records to map properties tied to repeat violations, giving tenants and city officials a way to spot problem areas.</p>
+          <div class="stack"><span>Python</span><span>BeautifulSoup</span><span>Geopandas</span><span>Tableau</span><span>Folium</span></div>
+          <p class="note">With Boston City Councilor Liz Breadon, via BU Spark! — code proprietary to the civic client.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-top"><h3>Fair Housing Equity Initiative</h3><span class="badge case">Case study</span></div>
+          <p>Analyzed 311 complaints, zoning records, and housing authority data to identify patterns of discriminatory code enforcement.</p>
+          <div class="stack"><span>Python</span><span>SQL</span><span>Civic data</span></div>
+          <p class="note">With Boston City Councilor Louijeune, via BU Spark! — code proprietary to the civic client.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-top"><h3>UQUIDO Recommendation Engine</h3><span class="badge case">Case study</span></div>
+          <p>Structured survey data from 100+ users to power a footwear recommendation engine; surfaced sizing and preference trends for the product team.</p>
+          <div class="stack"><span>Python</span><span>MySQL</span><span>Power BI</span><span>Tableau</span><span>R</span></div>
+          <p class="note">Data Science Internship, Padua, Italy — code proprietary to UQUIDO.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <svg class="divider" viewBox="0 0 1000 22" preserveAspectRatio="none"><path d="M0,11 L1000,11"/></svg>
+      <div class="sec-head"><span class="sec-num">04</span><h2>Experience</h2></div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">Mar 2025 — Present</div>
+          <div>
+            <div class="tl-role">Freelance Technical Consultant</div>
+            <div class="tl-org">Self-Employed, Los Angeles, CA</div>
+            <ul>
+              <li>Advise small businesses on technical strategy, data infrastructure, and process automation.</li>
+              <li>Led database migration projects — extraction, transformation, validation — preserving data integrity and minimizing downtime.</li>
+              <li>Build internal dashboards and reporting tools using Tableau, Power BI, and SQL-based analytics.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">Sep 2022 — May 2023</div>
+          <div>
+            <div class="tl-role">Data Science Project Manager</div>
+            <div class="tl-org">Boston University Spark!, Boston, MA</div>
+            <ul>
+              <li>Oversaw 8 Agile teams (~40 members) across two civic tech projects through sprint planning and stakeholder coordination.</li>
+              <li>Partnered with Boston City Councilors on Fair Housing and Bad Landlords data transparency initiatives.</li>
+              <li>Documented final datasets and GitHub repos with READMEs and data dictionaries for long-term civic use.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">Mar 2022 — May 2022</div>
+          <div>
+            <div class="tl-role">Data Science Intern</div>
+            <div class="tl-org">UQUIDO, Padua, Italy</div>
+            <ul>
+              <li>Structured and normalized survey data from 100+ users into a maintained MySQL database.</li>
+              <li>Ran exploratory and behavioral analysis in Python and R, surfacing sizing and preference trends.</li>
+              <li>Documented the full data pipeline for team onboarding and future scalability.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="resume">
+      <svg class="divider" viewBox="0 0 1000 22" preserveAspectRatio="none"><path d="M0,11 L1000,11"/></svg>
+      <div class="sec-head"><span class="sec-num">05</span><h2>Resume</h2></div>
+      <div class="resume-panel">
+        <embed src="assets/Gelila_Solomon_Resume.pdf" type="application/pdf" class="resume-embed" />
+        <p class="note" style="font-size:0.78rem;">Preview not loading? Some mobile browsers block inline PDFs — use the buttons below instead.</p>
+        <div class="resume-actions">
+          <a class="btn primary" href="assets/Gelila_Solomon_Resume.pdf" download>Download PDF</a>
+          <a class="btn ghost" href="assets/Gelila_Solomon_Resume.pdf" target="_blank" rel="noopener">Open in new tab</a>
+        </div>
+      </div>
+    </section>
+
+    <footer id="contact">
+      <svg class="divider" viewBox="0 0 1000 22" preserveAspectRatio="none"><path d="M0,11 L1000,11"/></svg>
+      <span class="sec-num">06</span>
+      <h2>Let's talk</h2>
+      <p class="lede" style="margin-top:0.8rem;">Open to Data &amp; BI Analyst roles — reach out directly or find me on LinkedIn.</p>
+      <div class="contact-row">
+        <a href="mailto:gksolomon11@gmail.com">gksolomon11@gmail.com</a>
+        <a href="tel:+13109461131">(310) 946-1131</a>
+        <a href="https://www.linkedin.com/in/gelilaksolomon" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="#" id="githubLinkFooter" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+      <div class="foot-note">© 2026 Gelila Solomon — built and deployed via GitHub Pages.</div>
+    </footer>
+  </main>
+</div>
+
+<script>
+  // Active nav highlight on scroll
+  const sections = document.querySelectorAll('main section, footer');
+  const navLinks = document.querySelectorAll('#railNav a');
+  const setActive = () => {
+    let current = '';
+    sections.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      if (rect.top <= 140) current = '#' + sec.id;
+    });
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === current);
+    });
+  };
+  document.addEventListener('scroll', setActive, { passive: true });
+  setActive();
+
+  // Scroll-reveal for cards and section headers
+  const revealTargets = document.querySelectorAll('.card, .sec-head, .skill-card, .tl-item, .resume-panel');
+  revealTargets.forEach(el => el.classList.add('reveal'));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){ entry.target.classList.add('in'); io.unobserve(entry.target); }
+    });
+  }, { threshold: 0.12 });
+  revealTargets.forEach(el => io.observe(el));
+
+  // TODO: replace with your real GitHub URL
+  const githubURL = "https://github.com/yourusername";
+  document.getElementById('githubLink').href = githubURL;
+  document.getElementById('githubLinkFooter').href = githubURL;
+</script>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[Project Name] — Gelila Solomon</title>
+<meta name="description" content="[One-line project description for search/link previews]">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12181C; --panel:#1A2126; --paper:#F1F2ED;
+    --line-dark: rgba(241,242,237,0.12);
+    --text-soft:#A9B2AE; --amber:#E2A63B; --cyan:#46AFC5; --crimson:#C1443C;
+    --display:'Space Grotesk',sans-serif; --body:'IBM Plex Sans',sans-serif; --mono:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{ background:var(--ink); color:var(--paper); font-family:var(--body); line-height:1.65; -webkit-font-smoothing:antialiased; }
+  a{ color:inherit; text-decoration:none; }
+  ::selection{ background:var(--amber); color:var(--ink); }
+  :focus-visible{ outline:2px solid var(--cyan); outline-offset:3px; }
+
+  .wrap{ max-width:820px; margin:0 auto; padding:4rem 5vw 6rem; }
+  .back{ font-family:var(--mono); font-size:0.78rem; color:var(--text-soft); display:inline-flex; gap:0.4rem; margin-bottom:2.4rem; }
+  .back:hover{ color:var(--cyan); }
+
+  .eyebrow{ font-family:var(--mono); font-size:0.75rem; color:var(--amber); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem; }
+  h1{ font-family:var(--display); font-weight:700; font-size:clamp(1.9rem,4vw,2.7rem); letter-spacing:-0.01em; max-width:20ch; }
+  .dek{ color:var(--text-soft); font-size:1.05rem; margin-top:1.1rem; max-width:60ch; }
+
+  .meta-row{ display:flex; flex-wrap:wrap; gap:2rem; margin:2.2rem 0 3rem; padding:1.4rem 0; border-top:1px solid var(--line-dark); border-bottom:1px solid var(--line-dark); }
+  .meta-row .item .k{ font-family:var(--mono); font-size:0.68rem; color:var(--text-soft); text-transform:uppercase; letter-spacing:0.06em; display:block; margin-bottom:0.3rem; }
+  .meta-row .item .v{ font-family:var(--mono); font-size:0.85rem; color:var(--paper); }
+
+  .link-row{ display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:3rem; }
+  .btn{ font-family:var(--mono); font-size:0.82rem; padding:0.7rem 1.2rem; border-radius:3px; border:1px solid var(--line-dark); }
+  .btn.primary{ background:var(--cyan); color:var(--ink); border-color:var(--cyan); }
+  .btn.ghost:hover{ border-color:var(--paper); }
+
+  .media{ width:100%; aspect-ratio:16/9; background:var(--panel); border:1px solid var(--line-dark); border-radius:6px; display:flex; align-items:center; justify-content:center; color:var(--text-soft); font-family:var(--mono); font-size:0.8rem; margin-bottom:3rem; }
+
+  h2{ font-family:var(--display); font-weight:600; font-size:1.35rem; margin:2.6rem 0 1rem; letter-spacing:-0.005em; }
+  h2 .num{ color:var(--cyan); font-family:var(--mono); font-size:0.9rem; margin-right:0.6rem; }
+  p{ color:var(--text-soft); margin-bottom:1rem; max-width:68ch; }
+  strong{ color:var(--paper); }
+  ul{ padding-left:1.2rem; margin-bottom:1rem; color:var(--text-soft); display:flex; flex-direction:column; gap:0.4rem; }
+  li::marker{ color:var(--cyan); }
+
+  .callout{ background:var(--panel); border:1px solid var(--line-dark); border-left:3px solid var(--amber); border-radius:4px; padding:1.2rem 1.4rem; margin:1.6rem 0; }
+  .callout .k{ font-family:var(--mono); font-size:0.7rem; color:var(--amber); text-transform:uppercase; letter-spacing:0.06em; display:block; margin-bottom:0.5rem; }
+
+  .stack-tags{ display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1rem; }
+  .stack-tags span{ font-family:var(--mono); font-size:0.72rem; border:1px solid var(--line-dark); padding:0.25rem 0.6rem; border-radius:3px; color:var(--text-soft); }
+
+  footer{ margin-top:4.5rem; padding-top:2rem; border-top:1px solid var(--line-dark); font-family:var(--mono); font-size:0.75rem; color:var(--text-soft); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back" href="index.html">← Back to all projects</a>
+
+  <div class="eyebrow">[Project category, e.g. Interactive Dashboard]</div>
+  <h1>[Project Name]</h1>
+  <p class="dek">[One or two sentences: what this project does and why it matters — this is what a recruiter reads before deciding to scroll further.]</p>
+
+  <div class="meta-row">
+    <div class="item"><span class="k">Role</span><span class="v">[Solo project / etc.]</span></div>
+    <div class="item"><span class="k">Timeframe</span><span class="v">[Month–Month Year]</span></div>
+    <div class="item"><span class="k">Tools</span><span class="v">[Python, SQL, Tableau...]</span></div>
+  </div>
+
+  <div class="link-row">
+    <a class="btn primary" href="#" target="_blank" rel="noopener">View live dashboard →</a>
+    <a class="btn ghost" href="#" target="_blank" rel="noopener">View on GitHub →</a>
+  </div>
+
+  <div class="media">[ Hero screenshot / dashboard GIF goes here ]</div>
+
+  <h2><span class="num">01</span>The problem</h2>
+  <p>[What question were you answering, or what decision needed to be made? Frame it the way a stakeholder would ask it, not as a tool list.]</p>
+
+  <h2><span class="num">02</span>The data</h2>
+  <p>[Where the data came from, its size/shape, and what made it messy or interesting. Be specific — row counts, source, time range.]</p>
+  <div class="stack-tags">
+    <span>[Data source]</span><span>[Format]</span><span>[Size]</span>
+  </div>
+
+  <h2><span class="num">03</span>Approach</h2>
+  <p>[Walk through your process at a level a technical reader can follow: cleaning steps, key transformations, modeling or dashboard-building choices. Use a list for discrete steps.]</p>
+  <ul>
+    <li>[Step one]</li>
+    <li>[Step two]</li>
+    <li>[Step three]</li>
+  </ul>
+
+  <div class="callout">
+    <span class="k">Key decision</span>
+    <p style="margin:0;">[One design or analytical decision worth calling out — and why you made it. This is what separates a portfolio piece from a tutorial.]</p>
+  </div>
+
+  <h2><span class="num">04</span>Findings &amp; outcome</h2>
+  <p>[What did you find? If this were a real business, what would you recommend? Concrete numbers beat vague claims — "reduced X by Y%" not "improved efficiency."]</p>
+
+  <h2><span class="num">05</span>Reflection</h2>
+  <p>[What would you do differently, or what would you build next if you kept going? Shows judgment, not just execution.]</p>
+
+  <footer>
+    Gelila Solomon · <a href="mailto:gksolomon11@gmail.com" style="color:var(--cyan);">gksolomon11@gmail.com</a> · <a href="index.html" style="color:var(--cyan);">Back to portfolio</a>
+  </footer>
+
+</div>
+</body>
+</html>
