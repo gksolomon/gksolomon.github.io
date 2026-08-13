@@ -358,11 +358,11 @@
       <p class="sec-sub">Four new projects built to demonstrate the full analytics loop end-to-end, alongside case studies from civic tech and industry work where the underlying code is proprietary.</p>
 
       <div class="proj-grid">
-        <div class="card">
+        <div class="card" onclick="window.location.href='f1-dashboard.html'" style="cursor:pointer" role="link" tabindex="0" onkeydown="if(event.key==='Enter'){window.location.href='f1-dashboard.html'}">
           <div class="card-top"><h3>F1 Performance Dashboard</h3><span class="badge case">Live</span></div>
           <p>An interactive dashboard comparing driver pace, tire strategy, and sector deltas across a season, built on real telemetry.</p>
           <div class="stack"><span>Python</span><span>FastF1</span><span>Tableau</span></div>
-          <div class="links"><a href="https://github.com/gksolomon/f1-performance-dashboard" target="_blank" rel="noopener">GitHub →</a><a href="f1-dashboard.html">Case study →</a></div>
+          <div class="links"><a href="https://github.com/gksolomon/f1-performance-dashboard" target="_blank" rel="noopener" onclick="event.stopPropagation()">GitHub →</a></div>
         </div>
 
         <div class="card">
