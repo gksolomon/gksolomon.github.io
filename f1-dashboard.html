@@ -75,12 +75,30 @@
     <a class="btn ghost" href="https://github.com/gksolomon/f1-performance-dashboard" target="_blank" rel="noopener">View on GitHub →</a>
   </div>
 
-  <div class="media" style="aspect-ratio: 1600 / 1000; padding:0;">
-    <iframe
-      src="https://public.tableau.com/views/2025F1SeasonRacePerformanceDashboard/2025F1SeasonRacePerformanceDashboard?:showVizHome=no&:embed=y&:toolbar=yes"
-      style="width:100%; height:100%; border:none; display:block;"
-      allowfullscreen>
-    </iframe>
+  <div class="media" id="vizScaleWrap" style="padding:0; overflow:hidden;">
+    <div class='tableauPlaceholder' id='viz1786563688234' style='position: relative'><noscript><a href='#'><img alt='2025 F1 Season — Race Performance Dashboard ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;20&#47;2025F1SeasonRacePerformanceDashboard&#47;2025F1SeasonRacePerformanceDashboard&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='2025F1SeasonRacePerformanceDashboard&#47;2025F1SeasonRacePerformanceDashboard' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;20&#47;2025F1SeasonRacePerformanceDashboard&#47;2025F1SeasonRacePerformanceDashboard&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>
+    <script type='text/javascript'>
+      var NATIVE_W = 1400, NATIVE_H = 850; // must match the Fixed Size you set in Tableau Desktop
+      var divElement = document.getElementById('viz1786563688234');
+      var vizElement = divElement.getElementsByTagName('object')[0];
+      vizElement.style.width = NATIVE_W + 'px';
+      vizElement.style.height = NATIVE_H + 'px';
+
+      var wrap = document.getElementById('vizScaleWrap');
+      function rescale(){
+        var scale = wrap.offsetWidth / NATIVE_W;
+        divElement.style.transform = 'scale(' + scale + ')';
+        divElement.style.transformOrigin = '0 0';
+        wrap.style.height = (NATIVE_H * scale) + 'px';
+      }
+      rescale();
+      window.addEventListener('resize', rescale);
+
+      var scriptElement = document.createElement('script');
+      scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+      vizElement.parentNode.insertBefore(scriptElement, vizElement);
+      scriptElement.onload = rescale;
+    </script>
   </div>
 
   <h2><span class="num">01</span>The problem</h2>
